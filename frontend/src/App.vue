@@ -3,18 +3,30 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">Stage Outfit Match Agent</p>
-        <h1>把一支舞，变成五套轻盈上台造型。</h1>
+        <h1 class="art-title">
+          <span>今天跳什么</span>
+          <b>?</b>
+        </h1>
         <p class="hero-text">
-          输入舞蹈题目或链接，选择舞台气质，智能体会整理全套衣服、鞋子、配饰、参考来源、搜索入口和 PDF 搭配报告。
+          写下舞蹈名、视频链接和想要的色系，选一个风格，就能看到五套可以直接参考的舞台搭配。
         </p>
       </div>
       <div class="look-rack" aria-label="演出服灵感衣架">
         <div class="rack-line"></div>
         <div class="soft-wash wash-one"></div>
         <div class="soft-wash wash-two"></div>
-        <div class="hanger h1"></div>
-        <div class="hanger h2"></div>
-        <div class="hanger h3"></div>
+        <div class="floating-look look-a">
+          <span>sweet</span>
+          <div class="mini-top"></div>
+          <div class="mini-skirt"></div>
+        </div>
+        <div class="floating-look look-b">
+          <span>stage</span>
+          <div class="mini-top"></div>
+          <div class="mini-skirt"></div>
+        </div>
+        <div class="floating-chip chip-a">粉白色系</div>
+        <div class="floating-chip chip-b">女团风</div>
       </div>
     </section>
 
@@ -30,8 +42,18 @@
           <textarea
             v-model="form.dance_input"
             rows="5"
-            placeholder="例如：NewJeans Super Shy / aespa Drama / 或粘贴 B站、YouTube、小红书链接"
+            placeholder="请输入舞蹈名或视频链接，例如：NewJeans Super Shy / aespa Drama / B站、YouTube、小红书链接"
           ></textarea>
+        </label>
+
+        <label class="field">
+          <span>色系要求（可选）</span>
+          <input
+            v-model="form.color_scheme"
+            class="text-input"
+            type="text"
+            placeholder="请输入想要的色系，例如：粉白色系、蓝黑色系、薄荷绿、黑银色系"
+          />
         </label>
 
         <div class="field">
@@ -169,7 +191,8 @@ const styles = ['甜美', '帅气', '性感', '休闲', '灵动', '韩系', '女
 const budgets = ['低预算', '中预算', '高预算']
 
 const form = reactive({
-  dance_input: '我想跳 NewJeans《Super Shy》，想要适合学校舞台的女团风演出服。',
+  dance_input: '',
+  color_scheme: '',
   style: '甜美',
   budget: '中预算'
 })
@@ -206,12 +229,22 @@ async function submit() {
 function useFallbackImage(event) {
   const svg = encodeURIComponent(`
     <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
-      <rect width="900" height="1200" fill="#fbf7f1"/>
-      <rect x="72" y="72" width="756" height="1056" fill="#f3c469" stroke="#181512" stroke-width="6"/>
-      <circle cx="450" cy="318" r="128" fill="#d64b3a"/>
-      <path d="M260 560h380l-62 360H322z" fill="#181512"/>
-      <path d="M310 545c40-80 90-120 140-120s100 40 140 120" fill="none" stroke="#2f6f61" stroke-width="46" stroke-linecap="round"/>
-      <text x="450" y="1030" text-anchor="middle" font-family="Arial" font-size="44" font-weight="700" fill="#181512">OUTFIT PREVIEW</text>
+      <defs>
+        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stop-color="#fffdf8"/>
+          <stop offset="0.55" stop-color="#eee7ff"/>
+          <stop offset="1" stop-color="#dff3ed"/>
+        </linearGradient>
+      </defs>
+      <rect width="900" height="1200" fill="url(#bg)"/>
+      <circle cx="230" cy="250" r="145" fill="#b9a2ee" opacity="0.35"/>
+      <circle cx="690" cy="345" r="185" fill="#bfe5d8" opacity="0.5"/>
+      <rect x="190" y="390" width="520" height="430" rx="56" fill="#fffdf8" opacity="0.82"/>
+      <path d="M350 520h200l-38 180H388z" fill="#b9a2ee" opacity="0.78"/>
+      <path d="M310 520c42-60 91-90 140-90s98 30 140 90" fill="none" stroke="#78ad9b" stroke-width="32" stroke-linecap="round" opacity="0.9"/>
+      <circle cx="450" cy="350" r="58" fill="#ffd6c7" opacity="0.92"/>
+      <text x="450" y="900" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#6f6a7a">图片暂未加载</text>
+      <text x="450" y="952" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#8a8495">请查看下方单品与搜索入口</text>
     </svg>
   `)
   event.target.src = `data:image/svg+xml;charset=utf-8,${svg}`
