@@ -3,13 +3,15 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">Stage Outfit Match Agent</p>
-        <h1>把一支舞，变成五套能上台的造型。</h1>
+        <h1>把一支舞，变成五套轻盈上台造型。</h1>
         <p class="hero-text">
-          输入舞蹈题目或链接，选择你想要的舞台气质，智能体会给出全套衣服、鞋子、配饰、参考来源、搜索链接和 PDF 搭配报告。
+          输入舞蹈题目或链接，选择舞台气质，智能体会整理全套衣服、鞋子、配饰、参考来源、搜索入口和 PDF 搭配报告。
         </p>
       </div>
       <div class="look-rack" aria-label="演出服灵感衣架">
         <div class="rack-line"></div>
+        <div class="soft-wash wash-one"></div>
+        <div class="soft-wash wash-two"></div>
         <div class="hanger h1"></div>
         <div class="hanger h2"></div>
         <div class="hanger h3"></div>
