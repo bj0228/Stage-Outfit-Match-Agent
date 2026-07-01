@@ -113,7 +113,7 @@
       <div class="outfit-grid">
         <article v-for="(outfit, index) in result.outfits" :key="outfit.name" class="outfit-card">
           <div class="photo">
-            <img :src="outfit.image_url" :alt="outfit.name" />
+            <img :src="outfit.image_url" :alt="outfit.name" @error="useFallbackImage" />
             <span>¥{{ outfit.total_price }}</span>
           </div>
           <div class="card-body">
@@ -121,16 +121,26 @@
             <h3>{{ outfit.name }}</h3>
             <p>{{ outfit.concept }}</p>
             <p class="reference">{{ outfit.reference }}</p>
+            <p class="shopping-note">图片为整套搭配参考图；下方按钮会打开对应平台的商品搜索结果。</p>
 
             <div class="items">
               <div v-for="item in outfit.items" :key="item.type + item.name" class="item-row">
+                <img class="item-thumb" :src="item.image_url" :alt="item.name" @error="useFallbackImage" />
                 <div>
                   <strong>{{ item.type }}</strong>
                   <span>{{ item.name }}</span>
                 </div>
                 <em>¥{{ item.price }}</em>
                 <div class="links">
-                  <a v-for="(url, label) in item.links" :key="label" :href="url" target="_blank">{{ label }}</a>
+                  <a
+                    v-for="(url, label) in item.links"
+                    :key="label"
+                    :href="url"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {{ label }}
+                  </a>
                 </div>
               </div>
             </div>
@@ -189,5 +199,19 @@ async function submit() {
   } finally {
     loading.value = false
   }
+}
+
+function useFallbackImage(event) {
+  const svg = encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+      <rect width="900" height="1200" fill="#fbf7f1"/>
+      <rect x="72" y="72" width="756" height="1056" fill="#f3c469" stroke="#181512" stroke-width="6"/>
+      <circle cx="450" cy="318" r="128" fill="#d64b3a"/>
+      <path d="M260 560h380l-62 360H322z" fill="#181512"/>
+      <path d="M310 545c40-80 90-120 140-120s100 40 140 120" fill="none" stroke="#2f6f61" stroke-width="46" stroke-linecap="round"/>
+      <text x="450" y="1030" text-anchor="middle" font-family="Arial" font-size="44" font-weight="700" fill="#181512">OUTFIT PREVIEW</text>
+    </svg>
+  `)
+  event.target.src = `data:image/svg+xml;charset=utf-8,${svg}`
 }
 </script>
