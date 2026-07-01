@@ -4,8 +4,12 @@
       <div class="hero-copy">
         <p class="eyebrow">Stage Outfit Match Agent</p>
         <h1 class="art-title">
-          <span>今天跳什么</span>
-          <b>?</b>
+          <span class="letter l1">今</span>
+          <span class="letter l2">天</span>
+          <span class="letter l3">跳</span>
+          <span class="letter l4">什</span>
+          <span class="letter l5">么</span>
+          <b class="question-pop">?</b>
         </h1>
         <p class="hero-text">
           写下舞蹈名、视频链接和想要的色系，选一个风格，就能看到五套可以直接参考的舞台搭配。
